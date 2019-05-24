@@ -19,7 +19,7 @@ var connection= mydb.createConnection({
     socketPath:"/path/to/socket"
 });
 //con.connect();
-connection.connect();
+//connection.connect();
 
 
 console.log(connection);
@@ -30,6 +30,7 @@ function App() {
           <div className="App">
               <Header/>
             </div>
+            <Route exact path="/" component={Dashboard} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route path="/addProject" component={AddProject} />
             <Route path="/signup" component={Signup} />
