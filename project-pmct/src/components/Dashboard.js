@@ -4,7 +4,23 @@ import Header from './layouts/Header';
 import {Link} from 'react-router-dom'
 import CreateProjectButton from './projectitem/CreateProjectButton';
 class Dashboard extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {projectList: []};
+      }
+      
+      componentDidMount(){
+        fetch('http://localhost:3001/get-project-list')
+        .then(response => response.json())
+        .then(data =>
+            this.setState({
+                projectList: data,
+              isLoading: false,
+            })
+          ).catch(error => this.setState({ error, isLoading: false }));
+      }
     render(){
+        const { projectList, isLoading, error } = this.state;
         return (
                 <div className="container">
                         <div className="row">
@@ -15,7 +31,9 @@ class Dashboard extends React.Component{
                                <br>
                                </br>
                                <hr></hr>
-                                <ProjectItem></ProjectItem>
+                               {projectList.map((pro,i) =>
+                                <ProjectItem key={pro.record_id} project={pro}/>
+                                )}
                             </div>
                         </div>
                     </div>

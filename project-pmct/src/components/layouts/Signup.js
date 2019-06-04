@@ -13,8 +13,6 @@ class Signup extends React.Component{
        // this.handleSubmit=this.handleSubmit.bind(this);
     }
     onChange(event){
-        console.log(event.target.name);
-
         if (event.target.name === 'name') {
             this.setState({name:event.target.value});
         } else if (event.target.name === 'emailId') {
@@ -27,11 +25,14 @@ class Signup extends React.Component{
     }
 
     handleClick(event){
-       console.log(this.state);
-      var mydb=require("../../MydbConnect");
-       mydb.add(this.state.name,this.state.emailId,this.state.password);
-
-
+        console.log(this.state.name,this.state.emailId,this.state.password);
+        fetch('http://localhost:3001/submit-signup-data', { mode: 'no-cors' ,
+            method: 'POST',
+            headers:{"Access-Control-Allow-Origin" : '*',
+            "Content-Type":'application/x-www-form-urlencoded'},
+            body:{name:this.state.name,emailId:this.state.emailId,password:this.state.password}
+        });
+    
     }
 
     render(){

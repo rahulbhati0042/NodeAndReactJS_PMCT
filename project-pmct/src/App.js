@@ -6,26 +6,13 @@ import Header from './components/layouts/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router ,Route,Link} from 'react-router-dom';
 import AddProject from './components/projectitem/AddProject';
+import UpdateProject from './components/projectitem/UpdateProject';
 import Signup from './components/layouts/Signup';
 import Login from './components/layouts/Login';
-var mydb= require('mysql');
-
-var connection= mydb.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"root",
-    database:"mydb",
-    port:"3007",
-    socketPath:"/path/to/socket"
-});
-//con.connect();
-//connection.connect();
-
-
-console.log(connection);
 
 function App() {
   return (
+    
     <Router>
           <div className="App">
               <Header/>
@@ -35,6 +22,7 @@ function App() {
             <Route path="/addProject" component={AddProject} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
+            <Route path="/updateProject/:record_id" component={UpdateProject} />
     </Router>
     
   );
